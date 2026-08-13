@@ -1,0 +1,19 @@
+[[categories]]
+name = "Memoir"
+slug = "memoir"
+empty = "Memory edits more ruthlessly than any author."
+
+[[categories]]
+name = "Quant & Arbitrage"
+slug = "quant-arbitrage"
+empty = "Every discrepancy is a question of price, time, and friction."
+
+[[categories]]
+name = "Machine Learning"
+slug = "machine-learning"
+empty = "A model is most interesting where intuition stops being enough."
+
+[[categories]]
+name = "Polis & Markets"
+slug = "polis-markets"
+empty = "Markets price beliefs; institutions decide which beliefs can matter."

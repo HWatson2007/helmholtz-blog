@@ -1,5 +1,5 @@
 +++
-title = "Posts"
+title = "Library"
 description = "Articles by Helmholtz W."
 
 sort_by = "date"

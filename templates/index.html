@@ -1,14 +1,22 @@
+{% set catalogue = load_data(path="data/categories.toml") %}
+{% set blog_url = get_url(path="@/blog/_index.md") %}
+
 <!doctype html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Helmholtz W.</title>
-    <link rel="stylesheet" href="/style.css">
+    <meta
+        name="description"
+        content="Systems, markets, machines, and other notes."
+    >
+
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
 </head>
 
 <body>
-
 <section class="hero">
     <div class="hero-content">
         <h1>Helmholtz W.</h1>
@@ -19,36 +27,65 @@
         </p>
     </div>
 
-    <div class="enter">
+    <a class="enter" href="#library">
         ↑ ENTER LIBRARY
-    </div>
+    </a>
 </section>
 
-<section class="library">
-    <header>
+<section class="library" id="library">
+    <header class="library-header">
         <h2>LIBRARY</h2>
-        <span>INDEX</span>
+
+        <a class="library-index-link" href="{{ blog_url }}">
+            INDEX ↗
+        </a>
     </header>
 
-    <div class="year">
-        <h3>2026</h3>
+    <div class="category-grid">
+        {% for category in catalogue.categories %}
+            {% set term = get_taxonomy_term(kind="categories", term=category.name, required=false) %}
 
-        <a href="#">
-            <time>AUG 13</time>
-            <span>Building My Personal Website</span>
-        </a>
+            <article class="category-card">
+                <div class="category-card-heading">
+                    <h3>{{ category.name }}</h3>
 
-        <a href="#">
-            <time>AUG 11</time>
-            <span>Notes on Triangle Arbitrage</span>
-        </a>
+                    <a
+                        class="category-all"
+                        href="{{ blog_url }}#{{ category.slug }}"
+                        aria-label="View all entries in {{ category.name }}"
+                    >
+                        ALL
+                    </a>
+                </div>
 
-        <a href="#">
-            <time>AUG 10</time>
-            <span>Market Regime Classification</span>
-        </a>
+                {% if term and term.page_count > 0 %}
+                    {% set pages = term.pages | sort(attribute="date") | reverse %}
+                    {% set latest = pages[0] %}
+
+                    <a class="category-latest" href="{{ latest.permalink }}">
+                        <time datetime="{{ latest.date }}">
+                            {{ latest.date | date(format="%b %d, %Y") | upper }}
+                        </time>
+
+                        <span class="category-latest-title">
+                            {{ latest.title or "Untitled" }}
+                        </span>
+                    </a>
+
+                    {% if latest.extra?.subtitle %}
+                        <p class="category-latest-subtitle">
+                            {{ latest.extra.subtitle }}
+                        </p>
+                    {% endif %}
+                {% else %}
+                    <p class="category-empty">
+                        <span aria-hidden="true">—</span>
+                        “{{ category.empty }}”
+                    </p>
+                {% endif %}
+            </article>
+        {% endfor %}
     </div>
 </section>
-
 </body>
 </html>

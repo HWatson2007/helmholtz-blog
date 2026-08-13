@@ -2,6 +2,9 @@
 title = "My First Post"
 date = 2026-08-13
 
+[taxonomies]
+categories = ["Memoir"]
+
 [extra]
 subtitle = "Something has to begin somewhere."
 +++

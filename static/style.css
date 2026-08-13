@@ -121,3 +121,341 @@ body {
     opacity: 0.45;
     font-size: 0.75rem;
 }
+/* --- Library categories -------------------------------------------------- */
+
+.enter {
+    color: inherit;
+    text-decoration: none;
+}
+
+.library-header .library-index-link {
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    opacity: 0.58;
+    transition: opacity 0.2s ease;
+}
+
+.library-header .library-index-link:hover {
+    opacity: 1;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 4vw;
+    margin-top: 4.5rem;
+}
+
+.category-card {
+    min-height: 17rem;
+    padding: 1.5rem 0 2.75rem;
+    border-top: 1px solid #3a3a3a;
+}
+
+.category-card-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.category-card h3 {
+    margin: 0;
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+    font-size: clamp(1.8rem, 3.25vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+}
+
+.category-all {
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    opacity: 0.38;
+    transition: opacity 0.2s ease;
+}
+
+.category-all:hover {
+    opacity: 0.9;
+}
+
+.category-latest {
+    display: block;
+    margin-top: 3.5rem;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.category-latest:hover {
+    opacity: 0.55;
+}
+
+.category-latest time {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    opacity: 0.38;
+}
+
+.category-latest-title {
+    display: block;
+    max-width: 24ch;
+    font-size: clamp(1.1rem, 1.75vw, 1.55rem);
+    line-height: 1.28;
+}
+
+.category-latest-subtitle {
+    max-width: 34rem;
+    margin: 0.8rem 0 0;
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+    font-size: 0.98rem;
+    font-style: italic;
+    line-height: 1.55;
+    opacity: 0.42;
+}
+
+.category-empty {
+    max-width: 31rem;
+    margin: 3.5rem 0 0;
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+    font-size: clamp(1.03rem, 1.45vw, 1.25rem);
+    font-style: italic;
+    line-height: 1.6;
+    opacity: 0.42;
+}
+
+/* --- Full library /blog/ ------------------------------------------------- */
+
+.archive-page {
+    min-height: 100vh;
+    background: #161616;
+    color: #f3f1eb;
+}
+
+.archive {
+    width: min(90vw, 92rem);
+    margin: 0 auto;
+    padding: 3rem 0 8rem;
+}
+
+.archive-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #3a3a3a;
+    font-size: 0.67rem;
+    letter-spacing: 0.15em;
+}
+
+.archive-nav a {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
+}
+
+.archive-nav a:hover {
+    opacity: 1;
+}
+
+.archive-nav span {
+    opacity: 0.35;
+}
+
+.archive-intro {
+    display: block;
+    padding: 5.5rem 0 6.5rem;
+    border-bottom: 0;
+}
+
+.archive-intro h1 {
+    margin: 0;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.065em;
+}
+
+.archive-intro p {
+    margin: 2rem 0 0;
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    opacity: 0.42;
+}
+
+.archive-categories {
+    border-top: 1px solid #555;
+}
+
+.archive-category {
+    padding: 4.5rem 0 5rem;
+    border-bottom: 1px solid #3a3a3a;
+    scroll-margin-top: 2rem;
+}
+
+.archive-category-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.6rem;
+}
+
+.archive-category-heading h2 {
+    margin: 0;
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+    font-size: clamp(2.15rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.archive-category-heading span {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    opacity: 0.35;
+}
+
+.archive-list a {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1.35rem 0;
+    border-top: 1px solid #2e2e2e;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.archive-list a:last-child {
+    border-bottom: 1px solid #2e2e2e;
+}
+
+.archive-list a:hover {
+    opacity: 0.5;
+}
+
+.archive-list time {
+    font-size: 0.68rem;
+    letter-spacing: 0.07em;
+    opacity: 0.38;
+}
+
+.archive-entry-title {
+    font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+    line-height: 1.35;
+}
+
+.archive-entry-arrow {
+    font-size: 0.72rem;
+    opacity: 0.32;
+}
+
+.archive-empty {
+    max-width: 38rem;
+    margin: 0;
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    font-style: italic;
+    line-height: 1.6;
+    opacity: 0.4;
+}
+
+@media (max-width: 760px) {
+    html {
+        scroll-snap-type: y proximity;
+    }
+
+    .hero {
+        padding: 8vw 6vw;
+    }
+
+    .hero h1 {
+        font-size: clamp(3.3rem, 15vw, 6rem);
+        white-space: normal;
+    }
+
+    .library {
+        padding: 8vw 6vw 12vw;
+    }
+
+    .library h2 {
+        font-size: clamp(3rem, 16vw, 5rem);
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+        margin-top: 3.5rem;
+    }
+
+    .category-card {
+        min-height: 0;
+        padding-bottom: 3.5rem;
+    }
+
+    .category-latest,
+    .category-empty {
+        margin-top: 2.5rem;
+    }
+
+    .archive {
+        width: min(88vw, 92rem);
+        padding-top: 2rem;
+    }
+
+    .archive-intro {
+        padding: 4.5rem 0 5rem;
+    }
+
+    .archive-category {
+        padding: 3.5rem 0 4rem;
+    }
+
+    .archive-list a {
+        grid-template-columns: 1fr auto;
+        gap: 0.65rem 1rem;
+    }
+
+    .archive-list time {
+        grid-column: 1 / -1;
+    }
+}

@@ -1,0 +1,78 @@
+{% set catalogue = load_data(path="data/categories.toml") %}
+{% set home_url = get_url(path="/") %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ section.title or "Library" }} · Helmholtz W.</title>
+
+    {% if section.description %}
+        <meta name="description" content="{{ section.description }}">
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+</head>
+
+<body class="archive-page">
+<main class="archive">
+    <nav class="archive-nav" aria-label="Primary">
+        <a href="{{ home_url }}">← HELMHOLTZ W.</a>
+        <span>INDEX</span>
+    </nav>
+
+    <header class="archive-intro">
+        <h1>LIBRARY</h1>
+        <p>Four threads, kept separately.</p>
+    </header>
+
+    <div class="archive-categories">
+        {% for category in catalogue.categories %}
+            {% set term = get_taxonomy_term(kind="categories", term=category.name, required=false) %}
+
+            <section class="archive-category" id="{{ category.slug }}">
+                <div class="archive-category-heading">
+                    <h2>{{ category.name }}</h2>
+
+                    {% if term %}
+                        <span>
+                            {{ term.page_count }}
+                            {% if term.page_count == 1 %}ENTRY{% else %}ENTRIES{% endif %}
+                        </span>
+                    {% else %}
+                        <span>0 ENTRIES</span>
+                    {% endif %}
+                </div>
+
+                {% if term and term.page_count > 0 %}
+                    {% set pages = term.pages | sort(attribute="date") | reverse %}
+
+                    <div class="archive-list">
+                        {% for page in pages %}
+                            <a href="{{ page.permalink }}">
+                                <time datetime="{{ page.date }}">
+                                    {{ page.date | date(format="%b %d, %Y") | upper }}
+                                </time>
+
+                                <span class="archive-entry-title">
+                                    {{ page.title or "Untitled" }}
+                                </span>
+
+                                <span class="archive-entry-arrow" aria-hidden="true">↗</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="archive-empty">
+                        <span aria-hidden="true">—</span>
+                        “{{ category.empty }}”
+                    </p>
+                {% endif %}
+            </section>
+        {% endfor %}
+    </div>
+</main>
+</body>
+</html>
