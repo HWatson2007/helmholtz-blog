@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
+body {
+    margin: 0;
+    background: #f3f1eb;
+    color: #161616;
+
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    min-height: 100svh;
+    padding: 5vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    scroll-snap-align: start;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Palatino,
+        Georgia,
+        serif;
+
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-weight: 400;
+
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+
+    white-space: nowrap;
+
+    font-feature-settings: "kern" 1;
+    text-rendering: optimizeLegibility;
+}
+
+.hero p {
+    margin-top: 3rem;
+    opacity: 0.55;
+    line-height: 1.5;
+}
+
+.enter {
+    align-self: flex-end;
+
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+}
+
+.library {
+    min-height: 100svh;
+    padding: 5vw;
+
+    background: #161616;
+    color: #f3f1eb;
+
+    scroll-snap-align: start;
+}
+
+.library header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    border-bottom: 1px solid #555;
+}
+
+.library h2 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+
+    margin: 0 0 2rem;
+}
+
+.year {
+    margin-top: 5rem;
+}
+
+.year h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    opacity: 0.5;
+}
+
+.year a {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+
+    padding: 1.4rem 0;
+
+    color: inherit;
+    text-decoration: none;
+
+    border-bottom: 1px solid #333;
+
+    font-size: clamp(1rem, 2vw, 1.5rem);
+
+    transition: opacity 0.2s ease;
+}
+
+.year a:hover {
+    opacity: 0.5;
+}
+
+.year time {
+    opacity: 0.45;
+    font-size: 0.75rem;
+}
