@@ -1,0 +1,27 @@
+minify_html = false
+
+# The URL the site will be built for
+base_url = "https://example.com"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+[markdown]
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+[extra]
+# Put all your custom variables here
+sections = [
+    { name = "posts", path = "/posts", is_external = false },
+]
+blog_section_path = "/posts"
+back_link_text = "Back"
+force_theme = false
+footer_copyright = "© 2026 Helmholtz W."
+footer_credits = false
+reaction = false

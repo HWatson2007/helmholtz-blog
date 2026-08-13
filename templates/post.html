@@ -1,0 +1,112 @@
+{% set subtitle = page.extra?.subtitle or "" %}
+{% set show_toc = page.extra?.toc or false %}
+{% set site_title = config.title or "Helmholtz W." %}
+
+<!doctype html>
+<html lang="{{ page.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{ page.title or "Untitled" }} · {{ site_title }}</title>
+
+  {% if page.description %}
+  <meta name="description" content="{{ page.description }}">
+  {% elif subtitle %}
+  <meta name="description" content="{{ subtitle }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ get_url(path="article.css") }}">
+
+  <script>
+    (() => {
+      const saved = localStorage.getItem("article-theme");
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.dataset.theme = saved;
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <header class="article-topbar">
+    <a class="back-link" href="{{ get_url(path="@/blog/_index.md") }}">
+      <span aria-hidden="true">←</span>
+      <span>Posts</span>
+    </a>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+      <span class="theme-toggle-light" aria-hidden="true">☼</span>
+      <span class="theme-toggle-dark" aria-hidden="true">☾</span>
+    </button>
+  </header>
+
+  <main class="article-layout{% if show_toc and page.toc %} with-toc{% endif %}">
+    <article class="article">
+      <header class="article-header">
+        <div class="article-site">{{ site_title }}</div>
+
+        <h1 class="article-title">{{ page.title or "Untitled" }}</h1>
+
+        {% if subtitle %}
+        <p class="article-subtitle">{{ subtitle }}</p>
+        {% endif %}
+
+        <div class="article-meta">
+          {% if page.date %}
+          <time datetime="{{ page.date }}">{{ page.date }}</time>
+          {% endif %}
+
+          {% if page.date %}
+          <span class="meta-separator" aria-hidden="true">·</span>
+          {% endif %}
+
+          <span>{{ page.reading_time }} min read</span>
+        </div>
+      </header>
+
+      <div class="prose">
+        {{ page.content | safe }}
+      </div>
+
+      <footer class="article-footer">
+        <div class="article-endmark" aria-hidden="true">∎</div>
+
+        <a class="footer-back" href="{{ get_url(path="@/blog/_index.md") }}">
+          ← Back to posts
+        </a>
+      </footer>
+    </article>
+
+    {% if show_toc and page.toc %}
+    <aside class="toc" aria-label="Table of contents">
+      <div class="toc-title">Contents</div>
+
+      <nav>
+        <ul>
+          {% for heading in page.toc %}
+          <li>
+            <a href="{{ heading.permalink }}">{{ heading.title }}</a>
+
+            {% if heading.children %}
+            <ul>
+              {% for child in heading.children %}
+              <li>
+                <a href="{{ child.permalink }}">{{ child.title }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </aside>
+    {% endif %}
+  </main>
+
+  <script src="{{ get_url(path="article.js") }}"></script>
+</body>
+</html>
