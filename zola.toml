@@ -1,7 +1,7 @@
 minify_html = false
 
 # The URL the site will be built for
-base_url = "https://helmholtz-blog.dadejkodarms475.workers.dev"
+base_url = "https://helmholtz-blog.hwatson.workers.dev"
 
 title = "Helmholtz W."
 description = "Systems, markets, machines, and other notes."

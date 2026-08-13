@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://helmholtz-blog.dadejkodarms475.workers.dev/</loc>
+        <loc>https://helmholtz-blog.hwatson.workers.dev/</loc>
     </url>
     <url>
-        <loc>https://helmholtz-blog.dadejkodarms475.workers.dev/blog/</loc>
+        <loc>https://helmholtz-blog.hwatson.workers.dev/blog/</loc>
     </url>
     <url>
-        <loc>https://helmholtz-blog.dadejkodarms475.workers.dev/blog/first-post/</loc>
+        <loc>https://helmholtz-blog.hwatson.workers.dev/blog/first-post/</loc>
         <lastmod>2026-08-13</lastmod>
     </url>
 </urlset>
