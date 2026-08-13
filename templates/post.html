@@ -1,21 +1,24 @@
 {% set subtitle = page.extra?.subtitle or "" %}
 {% set show_toc = page.extra?.toc or false %}
 {% set site_title = config.title or "Helmholtz W." %}
+{% set content_lang = page.extra?.lang or page.lang or config.default_language or "en" %}
 
 <!doctype html>
-<html lang="{{ page.lang }}">
+<html lang="{{ content_lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>{{ page.title or "Untitled" }} · {{ site_title }}</title>
-
   {% if page.description %}
   <meta name="description" content="{{ page.description }}">
   {% elif subtitle %}
   <meta name="description" content="{{ subtitle }}">
   {% endif %}
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
   <link rel="stylesheet" href="{{ get_url(path="article.css") }}">
 
   <script>
@@ -27,7 +30,6 @@
     })();
   </script>
 </head>
-
 <body>
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 
@@ -36,7 +38,6 @@
       <span aria-hidden="true">←</span>
       <span>Library</span>
     </a>
-
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
       <span class="theme-toggle-light" aria-hidden="true">☼</span>
       <span class="theme-toggle-dark" aria-hidden="true">☾</span>
@@ -47,7 +48,6 @@
     <article class="article">
       <header class="article-header">
         <div class="article-site">{{ site_title }}</div>
-
         <h1 class="article-title">{{ page.title or "Untitled" }}</h1>
 
         {% if subtitle %}
@@ -62,7 +62,6 @@
           {% if page.date %}
           <span class="meta-separator" aria-hidden="true">·</span>
           {% endif %}
-
           <span>{{ page.reading_time }} min read</span>
         </div>
       </header>
@@ -79,7 +78,6 @@
         </a>
       </footer>
     </article>
-
     {% if show_toc and page.toc %}
     <aside class="toc" aria-label="Table of contents">
       <div class="toc-title">Contents</div>
@@ -89,7 +87,6 @@
           {% for heading in page.toc %}
           <li>
             <a href="{{ heading.permalink }}">{{ heading.title }}</a>
-
             {% if heading.children %}
             <ul>
               {% for child in heading.children %}

@@ -13,9 +13,11 @@
         <meta name="description" content="{{ section.description }}">
     {% endif %}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
 </head>
-
 <body class="archive-page">
 <main class="archive">
     <nav class="archive-nav" aria-label="Primary">
@@ -31,11 +33,9 @@
     <div class="archive-categories">
         {% for category in catalogue.categories %}
             {% set term = get_taxonomy_term(kind="categories", term=category.name, required=false) %}
-
             <section class="archive-category" id="{{ category.slug }}">
                 <div class="archive-category-heading">
                     <h2>{{ category.name }}</h2>
-
                     {% if term %}
                         <span>
                             {{ term.page_count }}
@@ -48,18 +48,16 @@
 
                 {% if term and term.page_count > 0 %}
                     {% set pages = term.pages | sort(attribute="date") | reverse %}
-
                     <div class="archive-list">
                         {% for page in pages %}
+                            {% set page_lang = page.extra?.lang or page.lang or config.default_language or "en" %}
                             <a href="{{ page.permalink }}">
                                 <time datetime="{{ page.date }}">
                                     {{ page.date | date(format="%b %d, %Y") | upper }}
                                 </time>
-
-                                <span class="archive-entry-title">
+                                <span class="archive-entry-title" lang="{{ page_lang }}">
                                     {{ page.title or "Untitled" }}
                                 </span>
-
                                 <span class="archive-entry-arrow" aria-hidden="true">↗</span>
                             </a>
                         {% endfor %}

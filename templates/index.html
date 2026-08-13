@@ -13,9 +13,11 @@
         content="Systems, markets, machines, and other notes."
     >
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
 </head>
-
 <body>
 <section class="hero">
     <div class="hero-content">
@@ -40,7 +42,6 @@
             INDEX ↗
         </a>
     </header>
-
     <div class="category-grid">
         {% for category in catalogue.categories %}
             {% set term = get_taxonomy_term(kind="categories", term=category.name, required=false) %}
@@ -48,7 +49,6 @@
             <article class="category-card">
                 <div class="category-card-heading">
                     <h3>{{ category.name }}</h3>
-
                     <a
                         class="category-all"
                         href="{{ blog_url }}#{{ category.slug }}"
@@ -61,19 +61,18 @@
                 {% if term and term.page_count > 0 %}
                     {% set pages = term.pages | sort(attribute="date") | reverse %}
                     {% set latest = pages[0] %}
-
+                    {% set latest_lang = latest.extra?.lang or latest.lang or config.default_language or "en" %}
                     <a class="category-latest" href="{{ latest.permalink }}">
                         <time datetime="{{ latest.date }}">
                             {{ latest.date | date(format="%b %d, %Y") | upper }}
                         </time>
 
-                        <span class="category-latest-title">
+                        <span class="category-latest-title" lang="{{ latest_lang }}">
                             {{ latest.title or "Untitled" }}
                         </span>
                     </a>
-
                     {% if latest.extra?.subtitle %}
-                        <p class="category-latest-subtitle">
+                        <p class="category-latest-subtitle" lang="{{ latest_lang }}">
                             {{ latest.extra.subtitle }}
                         </p>
                     {% endif %}

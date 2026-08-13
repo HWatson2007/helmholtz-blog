@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+:root {
+    --font-ui: Arial, var(--font-cjk-sans), var(--font-emoji), sans-serif;
+    --font-prose: "Palatino Linotype", "Book Antiqua", Palatino, Georgia,
+        var(--font-cjk-serif), var(--font-emoji), serif;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-snap-type: y proximity;
@@ -12,7 +18,7 @@ body {
     background: #f3f1eb;
     color: #161616;
 
-    font-family: Arial, sans-serif;
+    font-family: var(--font-ui);
 }
 
 .hero {
@@ -29,12 +35,7 @@ body {
 .hero h1 {
     margin: 0;
 
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
 
     font-size: clamp(4rem, 10vw, 10rem);
     font-weight: 400;
@@ -163,12 +164,7 @@ body {
 
 .category-card h3 {
     margin: 0;
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
     font-size: clamp(1.8rem, 3.25vw, 3.4rem);
     font-weight: 400;
     line-height: 1.05;
@@ -218,12 +214,7 @@ body {
 .category-latest-subtitle {
     max-width: 34rem;
     margin: 0.8rem 0 0;
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
     font-size: 0.98rem;
     font-style: italic;
     line-height: 1.55;
@@ -233,12 +224,7 @@ body {
 .category-empty {
     max-width: 31rem;
     margin: 3.5rem 0 0;
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
     font-size: clamp(1.03rem, 1.45vw, 1.25rem);
     font-style: italic;
     line-height: 1.6;
@@ -300,12 +286,7 @@ body {
 
 .archive-intro p {
     margin: 2rem 0 0;
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
     font-size: 1.05rem;
     font-style: italic;
     opacity: 0.42;
@@ -331,12 +312,7 @@ body {
 
 .archive-category-heading h2 {
     margin: 0;
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
     font-size: clamp(2.15rem, 4vw, 4rem);
     font-weight: 400;
     line-height: 1;
@@ -388,16 +364,32 @@ body {
 .archive-empty {
     max-width: 38rem;
     margin: 0;
-    font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Palatino,
-        Georgia,
-        serif;
+    font-family: var(--font-prose);
     font-size: clamp(1.05rem, 1.5vw, 1.3rem);
     font-style: italic;
     line-height: 1.6;
     opacity: 0.4;
+}
+
+/* Avoid Latin-style tight tracking and synthetic italics on CJK text. */
+.category-latest-title:lang(zh),
+.category-latest-title:lang(ja),
+.category-latest-title:lang(ko),
+.archive-entry-title:lang(zh),
+.archive-entry-title:lang(ja),
+.archive-entry-title:lang(ko) {
+    font-family: Arial, var(--font-cjk-sans), var(--font-emoji), sans-serif;
+    letter-spacing: 0;
+    line-height: 1.55;
+}
+
+.category-latest-subtitle:lang(zh),
+.category-latest-subtitle:lang(ja),
+.category-latest-subtitle:lang(ko) {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia,
+        var(--font-cjk-serif), var(--font-emoji), serif;
+    font-style: normal;
+    line-height: 1.75;
 }
 
 @media (max-width: 760px) {

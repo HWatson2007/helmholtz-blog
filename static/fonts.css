@@ -1,0 +1,55 @@
+/*
+ * CJK + emoji type system.
+ *
+ * Source Han is always preferred when it is installed locally. The web fallback
+ * uses Google's Noto CJK builds, which are the Google-branded counterparts of
+ * the Source Han families and are served in unicode-range subsets for the web.
+ * Noto Emoji is intentionally the monochrome family.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@400;500;600;700&family=Noto+Sans+HK:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+HK:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Default CJK locale: Simplified Chinese. */
+  --font-cjk-serif: "Source Han Serif SC", "Noto Serif SC";
+  --font-cjk-sans: "Source Han Sans SC", "Noto Sans SC";
+  --font-emoji: "Noto Emoji", "Apple Color Emoji", "Segoe UI Emoji",
+    "Noto Color Emoji";
+}
+
+:lang(zh-CN),
+:lang(zh-SG),
+:lang(zh-Hans) {
+  --font-cjk-serif: "Source Han Serif SC", "Noto Serif SC";
+  --font-cjk-sans: "Source Han Sans SC", "Noto Sans SC";
+}
+
+:lang(zh-TW),
+:lang(zh-MO),
+:lang(zh-Hant) {
+  --font-cjk-serif: "Source Han Serif TC", "Noto Serif TC";
+  --font-cjk-sans: "Source Han Sans TC", "Noto Sans TC";
+}
+
+:lang(zh-HK),
+:lang(zh-Hant-HK) {
+  --font-cjk-serif: "Source Han Serif HC", "Source Han Serif HK",
+    "Noto Serif HK";
+  --font-cjk-sans: "Source Han Sans HC", "Source Han Sans HK",
+    "Noto Sans HK";
+}
+
+:lang(ja) {
+  --font-cjk-serif: "Source Han Serif", "Source Han Serif JP", "Noto Serif JP";
+  --font-cjk-sans: "Source Han Sans", "Source Han Sans JP", "Noto Sans JP";
+}
+
+:lang(ko) {
+  --font-cjk-serif: "Source Han Serif K", "Source Han Serif KR",
+    "Noto Serif KR";
+  --font-cjk-sans: "Source Han Sans K", "Source Han Sans KR", "Noto Sans KR";
+}
+
+/* Prefer text presentation for emoji when the browser supports the property. */
+html {
+  font-variant-emoji: text;
+}

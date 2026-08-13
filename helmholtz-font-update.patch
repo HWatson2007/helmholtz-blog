@@ -1,0 +1,386 @@
+--- a/static/article.css
++++ b/static/article.css
+@@ -13,11 +13,12 @@
+   --article-width: 44rem;
+   --toc-width: 13rem;
+ 
+-  --font-ui: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+-    "Noto Sans", "Noto Sans SC", sans-serif;
++  --font-ui: Inter, var(--font-cjk-sans), var(--font-emoji), ui-sans-serif,
++    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", sans-serif;
+   --font-prose: "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+-    Palatino, "Noto Serif", "Noto Serif SC", "Source Han Serif SC", serif;
+-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
++    Palatino, var(--font-cjk-serif), var(--font-emoji), serif;
++  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
++    var(--font-cjk-sans), var(--font-emoji), monospace;
+ }
+ 
+ html[data-theme="dark"] {
+@@ -192,6 +193,22 @@
+   line-height: 1.55;
+ }
+ 
++/* CJK display type should keep its native spacing and upright forms. */
++.article-title:lang(zh),
++.article-title:lang(ja),
++.article-title:lang(ko) {
++  max-width: 16em;
++  line-height: 1.14;
++  letter-spacing: 0;
++}
++
++.article-subtitle:lang(zh),
++.article-subtitle:lang(ja),
++.article-subtitle:lang(ko) {
++  font-style: normal;
++  line-height: 1.72;
++}
++
+ .article-meta {
+   display: flex;
+   align-items: center;
+@@ -211,6 +228,7 @@
+   color: var(--text);
+   font-family: var(--font-prose);
+   font-size: clamp(1.04rem, 1.3vw, 1.13rem);
++  font-weight: 400;
+   line-height: 1.88;
+   overflow-wrap: break-word;
+ }
+@@ -264,6 +282,33 @@
+   font-size: 1rem;
+ }
+ 
++.prose:lang(zh),
++.prose:lang(ja),
++.prose:lang(ko) {
++  line-height: 1.98;
++}
++
++.prose h1:lang(zh),
++.prose h2:lang(zh),
++.prose h3:lang(zh),
++.prose h4:lang(zh),
++.prose h5:lang(zh),
++.prose h6:lang(zh),
++.prose h1:lang(ja),
++.prose h2:lang(ja),
++.prose h3:lang(ja),
++.prose h4:lang(ja),
++.prose h5:lang(ja),
++.prose h6:lang(ja),
++.prose h1:lang(ko),
++.prose h2:lang(ko),
++.prose h3:lang(ko),
++.prose h4:lang(ko),
++.prose h5:lang(ko),
++.prose h6:lang(ko) {
++  letter-spacing: 0;
++}
++
+ .prose a {
+   color: inherit;
+   text-decoration-color: var(--faint);
+@@ -286,6 +331,12 @@
+   border-left: 1px solid var(--line);
+   color: var(--muted);
+   font-style: italic;
++}
++
++.prose blockquote:lang(zh),
++.prose blockquote:lang(ja),
++.prose blockquote:lang(ko) {
++  font-style: normal;
+ }
+ 
+ .prose blockquote > :last-child {
+--- a/static/style.css
++++ b/static/style.css
+@@ -1,5 +1,11 @@
+ * {
+     box-sizing: border-box;
++}
++
++:root {
++    --font-ui: Arial, var(--font-cjk-sans), var(--font-emoji), sans-serif;
++    --font-prose: "Palatino Linotype", "Book Antiqua", Palatino, Georgia,
++        var(--font-cjk-serif), var(--font-emoji), serif;
+ }
+ 
+ html {
+@@ -12,7 +18,7 @@
+     background: #f3f1eb;
+     color: #161616;
+ 
+-    font-family: Arial, sans-serif;
++    font-family: var(--font-ui);
+ }
+ 
+ .hero {
+@@ -29,12 +35,7 @@
+ .hero h1 {
+     margin: 0;
+ 
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+ 
+     font-size: clamp(4rem, 10vw, 10rem);
+     font-weight: 400;
+@@ -163,12 +164,7 @@
+ 
+ .category-card h3 {
+     margin: 0;
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+     font-size: clamp(1.8rem, 3.25vw, 3.4rem);
+     font-weight: 400;
+     line-height: 1.05;
+@@ -218,12 +214,7 @@
+ .category-latest-subtitle {
+     max-width: 34rem;
+     margin: 0.8rem 0 0;
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+     font-size: 0.98rem;
+     font-style: italic;
+     line-height: 1.55;
+@@ -233,12 +224,7 @@
+ .category-empty {
+     max-width: 31rem;
+     margin: 3.5rem 0 0;
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+     font-size: clamp(1.03rem, 1.45vw, 1.25rem);
+     font-style: italic;
+     line-height: 1.6;
+@@ -300,12 +286,7 @@
+ 
+ .archive-intro p {
+     margin: 2rem 0 0;
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+     font-size: 1.05rem;
+     font-style: italic;
+     opacity: 0.42;
+@@ -331,12 +312,7 @@
+ 
+ .archive-category-heading h2 {
+     margin: 0;
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+     font-size: clamp(2.15rem, 4vw, 4rem);
+     font-weight: 400;
+     line-height: 1;
+@@ -388,18 +364,34 @@
+ .archive-empty {
+     max-width: 38rem;
+     margin: 0;
+-    font-family:
+-        "Palatino Linotype",
+-        "Book Antiqua",
+-        Palatino,
+-        Georgia,
+-        serif;
++    font-family: var(--font-prose);
+     font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+     font-style: italic;
+     line-height: 1.6;
+     opacity: 0.4;
+ }
+ 
++/* Avoid Latin-style tight tracking and synthetic italics on CJK text. */
++.category-latest-title:lang(zh),
++.category-latest-title:lang(ja),
++.category-latest-title:lang(ko),
++.archive-entry-title:lang(zh),
++.archive-entry-title:lang(ja),
++.archive-entry-title:lang(ko) {
++    font-family: Arial, var(--font-cjk-sans), var(--font-emoji), sans-serif;
++    letter-spacing: 0;
++    line-height: 1.55;
++}
++
++.category-latest-subtitle:lang(zh),
++.category-latest-subtitle:lang(ja),
++.category-latest-subtitle:lang(ko) {
++    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia,
++        var(--font-cjk-serif), var(--font-emoji), serif;
++    font-style: normal;
++    line-height: 1.75;
++}
++
+ @media (max-width: 760px) {
+     html {
+         scroll-snap-type: y proximity;
+--- a/templates/index.html
++++ b/templates/index.html
+@@ -13,6 +13,9 @@
+         content="Systems, markets, machines, and other notes."
+     >
+ 
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++    <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
+     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+ </head>
+ <body>
+@@ -58,17 +61,18 @@
+                 {% if term and term.page_count > 0 %}
+                     {% set pages = term.pages | sort(attribute="date") | reverse %}
+                     {% set latest = pages[0] %}
++                    {% set latest_lang = latest.extra?.lang or latest.lang or config.default_language or "en" %}
+                     <a class="category-latest" href="{{ latest.permalink }}">
+                         <time datetime="{{ latest.date }}">
+                             {{ latest.date | date(format="%b %d, %Y") | upper }}
+                         </time>
+ 
+-                        <span class="category-latest-title">
++                        <span class="category-latest-title" lang="{{ latest_lang }}">
+                             {{ latest.title or "Untitled" }}
+                         </span>
+                     </a>
+                     {% if latest.extra?.subtitle %}
+-                        <p class="category-latest-subtitle">
++                        <p class="category-latest-subtitle" lang="{{ latest_lang }}">
+                             {{ latest.extra.subtitle }}
+                         </p>
+                     {% endif %}
+--- a/templates/section.html
++++ b/templates/section.html
+@@ -13,6 +13,9 @@
+         <meta name="description" content="{{ section.description }}">
+     {% endif %}
+ 
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++    <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
+     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+ </head>
+ <body class="archive-page">
+@@ -47,11 +50,12 @@
+                     {% set pages = term.pages | sort(attribute="date") | reverse %}
+                     <div class="archive-list">
+                         {% for page in pages %}
++                            {% set page_lang = page.extra?.lang or page.lang or config.default_language or "en" %}
+                             <a href="{{ page.permalink }}">
+                                 <time datetime="{{ page.date }}">
+                                     {{ page.date | date(format="%b %d, %Y") | upper }}
+                                 </time>
+-                                <span class="archive-entry-title">
++                                <span class="archive-entry-title" lang="{{ page_lang }}">
+                                     {{ page.title or "Untitled" }}
+                                 </span>
+                                 <span class="archive-entry-arrow" aria-hidden="true">↗</span>
+--- a/templates/post.html
++++ b/templates/post.html
+@@ -1,9 +1,10 @@
+ {% set subtitle = page.extra?.subtitle or "" %}
+ {% set show_toc = page.extra?.toc or false %}
+ {% set site_title = config.title or "Helmholtz W." %}
++{% set content_lang = page.extra?.lang or page.lang or config.default_language or "en" %}
+ 
+ <!doctype html>
+-<html lang="{{ page.lang }}">
++<html lang="{{ content_lang }}">
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+@@ -15,6 +16,9 @@
+   <meta name="description" content="{{ subtitle }}">
+   {% endif %}
+ 
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
+   <link rel="stylesheet" href="{{ get_url(path="article.css") }}">
+ 
+   <script>
+--- /dev/null
++++ b/static/fonts.css
+@@ -0,0 +1,55 @@
++/*
++ * CJK + emoji type system.
++ *
++ * Source Han is always preferred when it is installed locally. The web fallback
++ * uses Google's Noto CJK builds, which are the Google-branded counterparts of
++ * the Source Han families and are served in unicode-range subsets for the web.
++ * Noto Emoji is intentionally the monochrome family.
++ */
++@import url("https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@400;500;600;700&family=Noto+Sans+HK:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+HK:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap");
++
++:root {
++  /* Default CJK locale: Simplified Chinese. */
++  --font-cjk-serif: "Source Han Serif SC", "Noto Serif SC";
++  --font-cjk-sans: "Source Han Sans SC", "Noto Sans SC";
++  --font-emoji: "Noto Emoji", "Apple Color Emoji", "Segoe UI Emoji",
++    "Noto Color Emoji";
++}
++
++:lang(zh-CN),
++:lang(zh-SG),
++:lang(zh-Hans) {
++  --font-cjk-serif: "Source Han Serif SC", "Noto Serif SC";
++  --font-cjk-sans: "Source Han Sans SC", "Noto Sans SC";
++}
++
++:lang(zh-TW),
++:lang(zh-MO),
++:lang(zh-Hant) {
++  --font-cjk-serif: "Source Han Serif TC", "Noto Serif TC";
++  --font-cjk-sans: "Source Han Sans TC", "Noto Sans TC";
++}
++
++:lang(zh-HK),
++:lang(zh-Hant-HK) {
++  --font-cjk-serif: "Source Han Serif HC", "Source Han Serif HK",
++    "Noto Serif HK";
++  --font-cjk-sans: "Source Han Sans HC", "Source Han Sans HK",
++    "Noto Sans HK";
++}
++
++:lang(ja) {
++  --font-cjk-serif: "Source Han Serif", "Source Han Serif JP", "Noto Serif JP";
++  --font-cjk-sans: "Source Han Sans", "Source Han Sans JP", "Noto Sans JP";
++}
++
++:lang(ko) {
++  --font-cjk-serif: "Source Han Serif K", "Source Han Serif KR",
++    "Noto Serif KR";
++  --font-cjk-sans: "Source Han Sans K", "Source Han Sans KR", "Noto Sans KR";
++}
++
++/* Prefer text presentation for emoji when the browser supports the property. */
++html {
++  font-variant-emoji: text;
++}
