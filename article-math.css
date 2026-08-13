@@ -1,0 +1,18 @@
+/* KaTeX --------------------------------------------------------------- */
+.prose .katex {
+  font-size: 1.02em;
+}
+
+.math-display {
+  width: 100%;
+  margin: 1.9em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.math-display .katex-display {
+  min-width: max-content;
+  margin: 0;
+  padding: 0.12em 0 0.2em;
+}

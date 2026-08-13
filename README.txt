@@ -1,24 +1,24 @@
-Files in this bundle are intended to replace/add the corresponding files
-in the root of HWatson2007/helmholtz-blog.
+Helmholtz blog: KaTeX math support
 
-Important content convention for future posts:
+Apply from the repository root:
+  git apply helmholtz-katex-support.patch
 
-+++
-title = "..."
-date = 2026-08-13
+Local development (instead of `zola serve`):
+  node scripts/site.mjs serve
 
-[taxonomies]
-categories = ["Memoir"]  # exactly one of the four category names
+Production build (if zola is on PATH):
+  node scripts/site.mjs build
 
-[extra]
-subtitle = "..."
-+++
+Cloudflare build command:
+  curl -L https://github.com/getzola/zola/releases/download/v0.23.3/zola-v0.23.3-x86_64-unknown-linux-gnu.tar.gz | tar xz && node scripts/site.mjs build --zola ./zola
 
-Allowed category names:
-- Memoir
-- Quant & Arbitrage
-- Machine Learning
-- Polis & Markets
+Enable math in a post:
+  [extra]
+  math = true
 
-Empty-category copy and category ordering are centralized in:
-data/categories.toml
+Then write:
+  Inline: $x_i \in \mathbb{R}$
+
+  $$
+  \|x\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}
+  $$

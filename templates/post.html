@@ -1,5 +1,6 @@
 {% set subtitle = page.extra?.subtitle or "" %}
 {% set show_toc = page.extra?.toc or false %}
+{% set math_enabled = page.extra?.math or false %}
 {% set site_title = config.title or "Helmholtz W." %}
 {% set content_lang = page.extra?.lang or page.lang or config.default_language or "en" %}
 
@@ -8,7 +9,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>{{ page.title or "Untitled" }} · {{ site_title }}</title>
   {% if page.description %}
   <meta name="description" content="{{ page.description }}">
@@ -21,6 +21,23 @@
   <link rel="stylesheet" href="{{ get_url(path="fonts.css") }}">
   <link rel="stylesheet" href="{{ get_url(path="article.css") }}">
 
+  {% if math_enabled %}
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css"
+    integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ"
+    crossorigin="anonymous"
+  >
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.js"
+    integrity="sha384-ykMNcWQhhTUb0YV9SPpPUFURHZ+tWmubkakGBP+OgNK/UXdO2gtzglWx0Rj9hnO3"
+    crossorigin="anonymous"
+  ></script>
+  <script defer src="{{ get_url(path="math.js") }}"></script>
+  {% endif %}
+
   <script>
     (() => {
       const saved = localStorage.getItem("article-theme");
@@ -32,7 +49,6 @@
 </head>
 <body>
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
-
   <header class="article-topbar">
     <a class="back-link" href="{{ get_url(path="@/blog/_index.md") }}">
       <span aria-hidden="true">←</span>
@@ -43,7 +59,6 @@
       <span class="theme-toggle-dark" aria-hidden="true">☾</span>
     </button>
   </header>
-
   <main class="article-layout{% if show_toc and page.toc %} with-toc{% endif %}">
     <article class="article">
       <header class="article-header">
@@ -53,7 +68,6 @@
         {% if subtitle %}
         <p class="article-subtitle">{{ subtitle }}</p>
         {% endif %}
-
         <div class="article-meta">
           {% if page.date %}
           <time datetime="{{ page.date }}">{{ page.date }}</time>
@@ -69,7 +83,6 @@
       <div class="prose">
         {{ page.content | safe }}
       </div>
-
       <footer class="article-footer">
         <div class="article-endmark" aria-hidden="true">∎</div>
 
@@ -81,7 +94,6 @@
     {% if show_toc and page.toc %}
     <aside class="toc" aria-label="Table of contents">
       <div class="toc-title">Contents</div>
-
       <nav>
         <ul>
           {% for heading in page.toc %}
@@ -103,7 +115,6 @@
     </aside>
     {% endif %}
   </main>
-
   <script src="{{ get_url(path="article.js") }}"></script>
 </body>
 </html>
