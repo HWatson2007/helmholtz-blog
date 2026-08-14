@@ -1,5 +1,5 @@
 +++
-title = "Recap — How Linear Regression Learns"
+title = "Recap: How Linear Regression Learns"
 date = 2026-08-14
 
 [taxonomies]
